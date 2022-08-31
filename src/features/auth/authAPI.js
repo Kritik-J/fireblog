@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { auth, db, storage } from "../../firebase";
 import {
   loadUser,
@@ -69,7 +69,7 @@ export const registerAsync =
           email: email,
           role: "user",
           photoURL: avatarURL,
-          timestamp: Date.now(),
+          timestamp: Timestamp.fromDate(new Date()),
         });
 
         const userData = await getDoc(userRef);
@@ -150,8 +150,7 @@ export const googleAuthAsync = () => async (dispatch) => {
         email: user.email,
         role: "user",
         photoURL: user.photoURL,
-        // timestamp: user.metadata.creationTime,
-        timestamp: Date.now(),
+        timestamp: Timestamp.fromDate(new Date()),
       });
     }
 

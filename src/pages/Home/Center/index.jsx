@@ -1,7 +1,7 @@
 import React from "react";
 import { BlogBlock } from "../../../components";
 
-const index = () => {
+const Center = () => {
   return (
     <div className="h-full relative">
       <BlogBlock />
@@ -20,4 +20,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Center;

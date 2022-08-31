@@ -53,22 +53,21 @@ const Header = () => {
 };
 
 const HeaderContainer = styled.header`
-  position: relative;
-  width: 100%;
   z-index: 9999;
   background-color: var(--primary);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #eaeaea;
 `;
 
 const Navbar = styled.nav`
   max-width: 144rem;
   margin: 0 auto;
-  position: fixed;
+  position: relative;
   padding: 0 4rem;
   height: 6rem;
-  top: 0;
-  left: 0;
-  right: 0;
-  border-bottom: 1px solid #eaeaea;
   background-color: var(--primary);
 
   display: flex;

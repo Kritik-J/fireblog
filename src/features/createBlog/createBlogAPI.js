@@ -4,18 +4,19 @@ import {
   createBlogFailure,
 } from "./createBlogSlice";
 import { auth, db, storage } from "../../firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export const createBlogAsync = (blog) => async (dispatch) => {
   dispatch(createBlogRequest());
 
   try {
-    const auther_uid = await auth.currentUser.uid;
+    const author_uid = auth.currentUser.uid;
 
-    if (!auther_uid) {
+    if (!author_uid) {
       throw new Error("Can't create blog");
     }
+    const authorRef = doc(db, `users/${author_uid}`);
 
     const title = blog.get("title");
     const description = blog.get("description");
@@ -37,8 +38,8 @@ export const createBlogAsync = (blog) => async (dispatch) => {
       description,
       content,
       thumbnailURL,
-      auther_uid,
-      timestamp: Date.now(),
+      author: authorRef,
+      timestamp: Timestamp.fromDate(new Date()),
     });
 
     dispatch(createBlogSuccess("Blog created successfully"));
