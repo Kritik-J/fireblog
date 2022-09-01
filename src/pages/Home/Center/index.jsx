@@ -5,11 +5,13 @@ import { getBlogsAsync } from "../../../features/blog/blogAPI";
 
 const Center = () => {
   const dispatch = useDispatch();
-  const { blogs, loading, error } = useSelector((state) => state.blog);
+  const { blogs, loading } = useSelector((state) => state.blog);
 
   React.useEffect(() => {
-    dispatch(getBlogsAsync());
-  }, [dispatch]);
+    if (!blogs || blogs.length === 0) {
+      dispatch(getBlogsAsync());
+    }
+  }, [dispatch, blogs]);
 
   return (
     <>
