@@ -25,8 +25,8 @@ const Home = () => {
 const HomeScreen = styled.div`
   min-height: 100vh;
   padding: 6rem 4rem 0;
-  max-width: 144rem;
   margin: 0 auto;
+  max-width: 144rem;
   display: grid;
   grid-template-columns: 2fr 5fr 2fr;
 

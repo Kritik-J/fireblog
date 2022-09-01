@@ -14,6 +14,7 @@ import ReadBlog from "./pages/Blog/ReadBlog";
 import { loadUserAsync } from "./features/auth/authAPI";
 import { useDispatch } from "react-redux";
 import ProtectedRoute from "./utils/ProtectedRoute";
+// import Profile from "./pages/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="/create-blog" element={<CreateBlog />} />
               <Route path="/blog/:id" element={<ReadBlog />} />
+              {/* <Route path="/profile" element={<Profile />} /> */}
             </Route>
           </Route>
 

@@ -7,6 +7,8 @@ const About = () => {
 
 const AboutScreen = styled.div`
   min-height: 100vh;
+  margin: 0 auto;
+  max-width: 144rem;
   padding: 8rem 4rem 2rem;
 
   @media (max-width: 768px) {

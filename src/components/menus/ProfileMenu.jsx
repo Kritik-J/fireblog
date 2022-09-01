@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutAsync } from "../../features/auth/authAPI";
+import { closeProfileMenu } from "../../features/menu/menuSlice";
 
 const ProfileMenu = () => {
   const { user } = useSelector((state) => state.auth);
@@ -10,14 +11,18 @@ const ProfileMenu = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
+    dispatch(closeProfileMenu());
     dispatch(logoutAsync());
   };
 
   return (
     <ProfileMenuContainer>
+      <Triangle></Triangle>
+
       <ProfileMenuItem
         onClick={() => {
           history("/profile");
+          dispatch(closeProfileMenu());
         }}
       >
         Signed in as&nbsp;
@@ -27,6 +32,7 @@ const ProfileMenu = () => {
       <ProfileMenuItem
         onClick={() => {
           history("/profile");
+          dispatch(closeProfileMenu());
         }}
       >
         Your Profile
@@ -37,15 +43,38 @@ const ProfileMenu = () => {
   );
 };
 
+const Triangle = styled.div`
+  width: 3rem;
+  height: 2rem;
+  position: absolute;
+  top: -2rem;
+  right: 1rem;
+  overflow: hidden;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    background: white;
+    transform: rotate(45deg);
+    top: 1rem;
+    right: 0.5rem;
+
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.2);
+  }
+`;
+
 const ProfileMenuContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 6.4rem;
-  right: 4rem;
+  right: 0;
+  padding: 0.4rem 0;
+
   border-radius: 0.4rem;
-  border: 0.1rem solid #eaeaea;
   background-color: white;
   width: 18rem;
-  box-shadow: 0 0.4rem 0.4rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.2);
 `;
 
 const ProfileMenuItem = styled.div`
@@ -61,13 +90,8 @@ const ProfileMenuItem = styled.div`
     cursor: pointer;
   }
 
-  &:first-child {
-    border-radius: 0.4rem 0.4rem 0 0;
-  }
-
   &:last-child {
     border-bottom: none;
-    border-radius: 0 0 0.4rem 0.4rem;
   }
 `;
 

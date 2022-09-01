@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import authReducer from "../features/auth/authSlice";
 import resetPasswordReducer from "../features/resetPassword/resetPasswordSlice";
 import createBlogReducer from "../features/createBlog/createBlogSlice";
@@ -13,4 +13,10 @@ export const store = configureStore({
     blog: blogReducer,
     menu: menuReducer,
   },
+
+  middleware: [
+    ...getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+  ],
 });

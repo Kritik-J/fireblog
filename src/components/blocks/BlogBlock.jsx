@@ -1,43 +1,44 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components/macro";
+import day from "dayjs";
 
-const BlogBlock = () => {
+const BlogBlock = ({ blog }) => {
+  const time =
+    blog.timestamp.seconds * 1000 + blog.timestamp.nanoseconds / 1000000;
+
   return (
     <BlogContainer>
       <div className="blog__info">
         <h1 className="blog__title">
-          <Link to="/blog/1">Blog Title</Link>
+          <Link to="/blog/1">{blog.title}</Link>
         </h1>
 
-        <p className="blog__description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem, ipsum
-          dolor sit amet consectetur adipiscing elit.
-        </p>
+        <p className="blog__description">{blog.description}</p>
 
         <div className="blog__author">
           <img
             className="blog__author-image"
-            src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-            alt="author"
+            src={blog.author.photoURL}
+            alt={blog.author.name}
           />
 
-          <p className="blog__author-name">John Doe</p>
+          <p className="blog__author-name">{blog.author.name}</p>
         </div>
 
         <div className="blog__createdAt">
-          <p className="blog__createdAt-date">22 january 2020</p>
+          <p className="blog__createdAt-date">
+            {day(time).format("DD MMM YYYY")}
+          </p>
 
-          <p className="blog__createdAt-time">11:00 am</p>
+          <p className="blog__createdAt-time">
+            {day(time).format("hh:mm:ss a")}
+          </p>
         </div>
       </div>
 
       {/* <Link to="/blog/1"> */}
-      <img
-        src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-        alt="blog"
-        className="blog__image"
-      />
+      <img src={blog.thumbnailURL} alt="blog" className="blog__image" />
       {/* </Link> */}
     </BlogContainer>
   );
@@ -46,6 +47,7 @@ const BlogBlock = () => {
 const BlogContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 2rem;
   border-bottom: 0.1rem solid #eaeaea;
 

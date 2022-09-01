@@ -90,8 +90,6 @@ const CreateBlog = () => {
               className={`file__input__container 
               ${thumbnail ? "file__input__container--active" : ""}`}
             >
-              {/* <FontAwesomeIcon icon={faUpload} className="file__input__icon" /> */}
-
               <p className="file__input__text">
                 <span className="font-semibold">Click to upload</span> or drag
                 and drop
@@ -134,9 +132,29 @@ const CreateBlog = () => {
         {message && <Alert status="success">{message}</Alert>}
       </CreateBlogContainer>
 
-      {/* <HelperContainer>
-        <h2 className="helper__title">Learn how to create a blog post</h2>
-      </HelperContainer> */}
+      <BlogPreviewContainer>
+        <h1 className="preview__title">Preview</h1>
+
+        <div className="preview__thumbnail">
+          <img
+            src={
+              thumbnail
+                ? URL.createObjectURL(thumbnail)
+                : "https://via.placeholder.com/200x200"
+            }
+            alt="thumbnail"
+          />
+        </div>
+        <div className="preview__content">
+          <h2 className="preview__content__title">
+            {title ? title : "Title goes here"}
+          </h2>
+
+          <p className="preview__content__description">
+            {description ? description : "Description goes here"}
+          </p>
+        </div>
+      </BlogPreviewContainer>
     </CreateBlogScreen>
   );
 };
@@ -148,12 +166,13 @@ const CreateBlogScreen = styled.div`
   margin: 0 auto;
   display: grid;
   grid-template-columns: 5fr 3fr;
-  grid-gap: 2rem;
+  grid-gap: 4rem;
 
   @media (max-width: 768px) {
     padding: 8rem 2rem 2rem;
     display: flex;
     flex-direction: column;
+    grid-gap: 2rem;
   }
 `;
 
@@ -163,7 +182,6 @@ const CreateBlogContainer = styled.div`
   width: 100%;
   height: fit-content;
   background-color: #fff;
-  padding: 2rem;
   border-radius: 0.4rem;
   box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
   position: relative;
@@ -183,6 +201,7 @@ const CreateBlogContainer = styled.div`
 
   .form__label {
     font-size: 1.6rem;
+    font-weight: 600;
     margin-bottom: 1rem;
   }
 
@@ -254,13 +273,57 @@ const CreateBlogContainer = styled.div`
   }
 `;
 
-// const HelperContainer = styled.div`
-//   .helper__title {
-//     font-size: 2rem;
-//     font-weight: 700;
-//     margin-bottom: 2rem;
-//     color: var(--secondary);
-//   }
-// `;
+const BlogPreviewContainer = styled.div`
+  .preview__title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--secondary);
+  }
+
+  .preview__thumbnail {
+    width: 100%;
+    height: 24rem;
+    border-radius: 0.4rem;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  .preview__content {
+    margin-top: 1rem;
+
+    .preview__content__title {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .preview__content__description {
+      font-size: 1.6rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .preview__title {
+      font-size: 2rem;
+    }
+
+    .preview__content {
+      .preview__content__title {
+        font-size: 1.8rem;
+      }
+
+      .preview__content__description {
+        font-size: 1.4rem;
+      }
+    }
+  }
+`;
 
 export default CreateBlog;

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components/macro";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import ProfileMenu from "./menus/ProfileMenu";
 import { toggleProfileMenu } from "../features/menu/menuSlice";
 
 const Header = () => {
@@ -10,7 +9,6 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const { isAuthenticated, user } = useSelector((state) => state.auth);
-  const { profileMenu } = useSelector((state) => state.menu);
 
   const handleJoin = () => {
     history("/register");
@@ -30,19 +28,13 @@ const Header = () => {
           <NavLinkElement to="/about">About</NavLinkElement>
           <NavLinkElement to="/contact">Contact</NavLinkElement>
           {isAuthenticated ? (
-            <>
-              <UserAvatar>
-                <img
-                  src={user.photoURL}
-                  alt={user.name}
-                  onClick={() => {
-                    dispatch(toggleProfileMenu());
-                  }}
-                />
-
-                {profileMenu && <ProfileMenu />}
-              </UserAvatar>
-            </>
+            <Avatar
+              src={user.photoURL}
+              alt={user.name}
+              onClick={() => {
+                dispatch(toggleProfileMenu());
+              }}
+            />
           ) : (
             <JoinButton onClick={handleJoin}>Join now</JoinButton>
           )}
@@ -121,20 +113,15 @@ const JoinButton = styled.button`
   }
 `;
 
-const UserAvatar = styled.div`
-  position: relative;
+const Avatar = styled.img`
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 
-  img {
-    height: 4rem;
-    width: 4rem;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-
-    &:hover {
-      cursor: pointer;
-      box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.4);
-    }
+  &:hover {
+    cursor: pointer;
   }
 `;
 
