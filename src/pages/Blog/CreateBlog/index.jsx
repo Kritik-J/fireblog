@@ -66,6 +66,8 @@ const CreateBlog = () => {
             id="title"
             className="form__input"
             required
+            minLength="32"
+            maxLength="100"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -79,6 +81,7 @@ const CreateBlog = () => {
             rows="3"
             cols="50"
             required
+            maxLength="200"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />

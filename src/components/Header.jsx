@@ -52,6 +52,7 @@ const HeaderContainer = styled.header`
   left: 0;
   right: 0;
   border-bottom: 1px solid #eaeaea;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 `;
 
 const Navbar = styled.nav`

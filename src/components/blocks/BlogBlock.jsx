@@ -4,17 +4,25 @@ import styled from "styled-components/macro";
 import day from "dayjs";
 
 const BlogBlock = ({ blog }) => {
+  const [screenSize, setScreenSize] = React.useState(window.innerWidth);
+
   const time =
     blog.timestamp.seconds * 1000 + blog.timestamp.nanoseconds / 1000000;
+
+  window.addEventListener("resize", () => {
+    setScreenSize(window.innerWidth);
+  });
 
   return (
     <BlogContainer>
       <div className="blog__info">
         <h1 className="blog__title">
-          <Link to={`/blog/${blog.slug}`}>{blog.title}</Link>
+          <Link to={`/blog/${blog.slug}`}>
+            {screenSize < 768 && blog.title.length > 64
+              ? blog.title.slice(0, 64) + ".."
+              : blog.title}
+          </Link>
         </h1>
-
-        <p className="blog__description">{blog.description}</p>
 
         <div className="blog__author">
           <img
@@ -38,21 +46,27 @@ const BlogBlock = ({ blog }) => {
       </div>
 
       <Link to={`/blog/${blog.slug}`}>
-        <img src={blog.thumbnailURL} alt="blog" className="blog__image" />
+        <div className="flex items-center h-full">
+          <img src={blog.thumbnailURL} alt="blog" className="blog__image" />
+        </div>
       </Link>
     </BlogContainer>
   );
 };
 
 const BlogContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: 1rem;
   padding: 2rem;
   border-bottom: 0.1rem solid #eaeaea;
 
   &:last-child {
     border-bottom: none;
+  }
+
+  .blog__info {
+    width: 100%;
   }
 
   .blog__title {
@@ -61,28 +75,22 @@ const BlogContainer = styled.div`
     margin-bottom: 0.5rem;
   }
 
-  .blog__description {
-    font-size: 1.4rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-  }
-
   .blog__author {
     margin-top: 1rem;
     display: flex;
     align-items: center;
-  }
 
-  .blog__author-image {
-    width: 3.2rem;
-    height: 3.2rem;
-    border-radius: 50%;
-    margin-right: 1rem;
-    border: 0.2rem solid #eaeaea;
-  }
+    .blog__author-image {
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 50%;
+      margin-right: 1rem;
+      border: 0.2rem solid #eaeaea;
+    }
 
-  .blog__author-name {
-    font-size: 1.4rem;
+    .blog__author-name {
+      font-size: 1.4rem;
+    }
   }
 
   .blog__createdAt {
@@ -101,10 +109,10 @@ const BlogContainer = styled.div`
   }
 
   .blog__image {
-    width: 18rem;
+    /* min-width: 18rem; */
+    width: 100%;
     height: 12rem;
     object-fit: cover;
-    margin-left: 1rem;
     border-radius: 0.4rem;
     display: block;
   }
@@ -116,20 +124,24 @@ const BlogContainer = styled.div`
       font-size: 1.6rem;
     }
 
-    .blog__description,
-    .blog__author-name,
     .blog__createdAt-date,
     .blog__createdAt-time {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
     }
 
-    .blog__author-image {
-      width: 2.8rem;
-      height: 2.8rem;
+    .blog__author {
+      .blog__author-name {
+        font-size: 1.125rem;
+      }
+
+      .blog__author-image {
+        width: 2.4rem;
+        height: 2.4rem;
+      }
     }
 
     .blog__image {
-      width: 14rem;
+      min-width: 14rem;
       height: 10rem;
     }
   }

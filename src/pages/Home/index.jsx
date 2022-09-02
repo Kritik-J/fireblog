@@ -38,7 +38,7 @@ const HomeScreen = styled.div`
 `;
 
 const LeftContainer = styled.div`
-  padding-right: 1rem;
+  padding-right: 2rem;
 
   @media (max-width: 768px) {
     padding-right: 0;
@@ -57,7 +57,7 @@ const CenterContainer = styled.div`
 `;
 
 const RightContainer = styled.div`
-  padding-left: 1rem;
+  padding-left: 2rem;
 
   @media (max-width: 768px) {
     padding-left: 0;
