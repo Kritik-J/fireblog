@@ -11,7 +11,7 @@ const BlogBlock = ({ blog }) => {
     <BlogContainer>
       <div className="blog__info">
         <h1 className="blog__title">
-          <Link to="/blog/1">{blog.title}</Link>
+          <Link to={`/blog/${blog.slug}`}>{blog.title}</Link>
         </h1>
 
         <p className="blog__description">{blog.description}</p>
@@ -37,9 +37,9 @@ const BlogBlock = ({ blog }) => {
         </div>
       </div>
 
-      {/* <Link to="/blog/1"> */}
-      <img src={blog.thumbnailURL} alt="blog" className="blog__image" />
-      {/* </Link> */}
+      <Link to={`/blog/${blog.slug}`}>
+        <img src={blog.thumbnailURL} alt="blog" className="blog__image" />
+      </Link>
     </BlogContainer>
   );
 };
@@ -78,11 +78,11 @@ const BlogContainer = styled.div`
     height: 3.2rem;
     border-radius: 50%;
     margin-right: 1rem;
+    border: 0.2rem solid #eaeaea;
   }
 
   .blog__author-name {
     font-size: 1.4rem;
-    /* font-weight: 500; */
   }
 
   .blog__createdAt {
@@ -123,9 +123,14 @@ const BlogContainer = styled.div`
       font-size: 1.25rem;
     }
 
+    .blog__author-image {
+      width: 2.8rem;
+      height: 2.8rem;
+    }
+
     .blog__image {
-      width: 16rem;
-      height: 12rem;
+      width: 14rem;
+      height: 10rem;
     }
   }
 `;

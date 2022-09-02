@@ -8,14 +8,18 @@ const ProtectedRoute = ({
   redirectLogin = "/login",
   redirectHome = "/",
 }) => {
-  const { isAuthenticated, loading, user } = useSelector((state) => state.auth);
+  const { isAuthenticated, userLoading, user } = useSelector(
+    (state) => state.auth
+  );
 
-  if (!loading && !isAuthenticated) {
-    return <Navigate to={redirectLogin} />;
-  }
-
-  if (adminRoute && !user.role === "admin") {
-    return <Navigate to={redirectHome} />;
+  if (userLoading === undefined) {
+  } else {
+    if (!userLoading && !isAuthenticated) {
+      return <Navigate to={`${redirectLogin}`} />;
+    }
+    if (!userLoading && adminRoute && user.role !== "adnmin") {
+      return <Navigate to={`${redirectHome}`} replace />;
+    }
   }
 
   return <div>{children ? children : <Outlet />}</div>;

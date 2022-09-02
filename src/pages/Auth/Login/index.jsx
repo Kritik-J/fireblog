@@ -12,7 +12,9 @@ const Login = () => {
   const [password, setPassword] = React.useState("");
   const history = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error, message } = useSelector((state) => state.auth);
+  const { loading, error, message, isAuthenticated } = useSelector(
+    (state) => state.auth
+  );
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -38,7 +40,11 @@ const Login = () => {
         dispatch(clearError());
       }, 3000);
     }
-  }, [error, message, dispatch, history]);
+
+    if (isAuthenticated) {
+      history(-1);
+    }
+  }, [error, message, dispatch, history, isAuthenticated]);
 
   return (
     <LoginScreen

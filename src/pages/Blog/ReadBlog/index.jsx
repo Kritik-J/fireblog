@@ -2,8 +2,21 @@ import React from "react";
 import styled from "styled-components/macro";
 import Left from "./Left";
 import Right from "./Right";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getBlogAsync } from "../../../features/blog/blogAPI";
 
 const ReadBlog = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { readBlog } = useSelector((state) => state.blog);
+
+  React.useEffect(() => {
+    if (!readBlog || readBlog.slug !== id) {
+      dispatch(getBlogAsync(id));
+    }
+  }, [dispatch, id, readBlog]);
+
   return (
     <ReadBlogScreen>
       <LeftContainer>
@@ -26,6 +39,8 @@ const ReadBlogScreen = styled.div`
 
   @media (max-width: 768px) {
     padding: 8rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -43,6 +58,7 @@ const RightContainer = styled.div`
 
   @media (max-width: 768px) {
     padding-left: 0;
+    margin-top: 2rem;
   }
 `;
 

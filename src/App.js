@@ -28,10 +28,11 @@ function App() {
       <Router>
         <Routes>
           <Route element={<GeneralLayout />}>
-            <Route exact path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+
             <Route element={<ProtectedRoute />}>
+              <Route exact path="/" element={<Home />} />
               <Route path="/create-blog" element={<CreateBlog />} />
               <Route path="/blog/:id" element={<ReadBlog />} />
               {/* <Route path="/profile" element={<Profile />} /> */}

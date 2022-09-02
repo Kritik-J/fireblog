@@ -92,6 +92,10 @@ const NavLinkElement = styled(NavLink)`
   &.active {
     color: var(--secondary);
   }
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const JoinButton = styled.button`
@@ -122,6 +126,11 @@ const Avatar = styled.img`
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    height: 3.2rem;
+    width: 3.2rem;
   }
 `;
 
