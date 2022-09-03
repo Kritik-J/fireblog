@@ -15,9 +15,8 @@ const ReadBlog = () => {
 
   React.useEffect(() => {
     if (readBlogError) {
-      dispatch(clearReadBlogError()).then(() => {
-        history("/404");
-      });
+      dispatch(clearReadBlogError());
+      history("/404");
     }
 
     if (!readBlog || readBlog.slug !== id) {
