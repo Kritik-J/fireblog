@@ -6,27 +6,36 @@ import { clearBlogsError } from "../../../features/blog/blogSlice";
 
 const Center = () => {
   const dispatch = useDispatch();
-  const { blogs, loading, error } = useSelector((state) => state.blog);
-  const [isBlogEmpty, setIsBlogEmpty] = React.useState(false);
+  const { blogs, loading, error, blogsNotFound } = useSelector(
+    (state) => state.blog
+  );
 
   React.useEffect(() => {
-    if (error === "No blogs found") {
-      setIsBlogEmpty(true);
+    if (error) {
       dispatch(clearBlogsError());
     }
 
-    if (!isBlogEmpty) {
+    if (!blogsNotFound) {
       if (blogs.length === 0) {
         dispatch(getBlogsAsync());
       }
     }
-  }, [dispatch, error, blogs, isBlogEmpty]);
+  }, [dispatch, error, blogs, blogsNotFound]);
 
   return (
     <>
       {loading && <Loader />}
       <div className="h-full relative ">
-        {blogs && blogs.map((blog) => <BlogBlock key={blog.id} blog={blog} />)}
+        {blogsNotFound ? (
+          <div className="text-center text-2xl font-bold text-gray-500 pt-8">
+            No blogs found
+          </div>
+        ) : (
+          <>
+            {blogs &&
+              blogs.map((blog) => <BlogBlock key={blog.id} blog={blog} />)}
+          </>
+        )}
       </div>
     </>
   );

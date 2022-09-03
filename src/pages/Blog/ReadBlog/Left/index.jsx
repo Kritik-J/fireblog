@@ -1,18 +1,37 @@
 import React from "react";
-import { useSelector } from "react-redux";
-// import styled from "styled-components/macro";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { Loader } from "../../../../components";
+import { getBlogAsync } from "../../../../features/blog/blogAPI";
 import BlogContainer from "./BlogContainer";
 
 const Left = () => {
-  const { readBlogLoading, readBlog } = useSelector((state) => state.blog);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { readBlogLoading, readBlog, readBlogNotFound } = useSelector(
+    (state) => state.blog
+  );
+
+  React.useEffect(() => {
+    if (!readBlog || readBlog.slug !== id) {
+      dispatch(getBlogAsync(id));
+    }
+  }, [dispatch, id, readBlog]);
 
   return (
     <div className="h-full relative">
       {readBlogLoading ? (
         <Loader />
       ) : (
-        <>{readBlog && <BlogContainer blog={readBlog} />}</>
+        <>
+          {readBlogNotFound ? (
+            <div className="text-center text-2xl font-bold text-gray-500">
+              Blog not found
+            </div>
+          ) : (
+            <>{readBlog && <BlogContainer blog={readBlog} />}</>
+          )}
+        </>
       )}
     </div>
   );

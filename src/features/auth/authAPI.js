@@ -64,7 +64,8 @@ export const registerAsync =
 
         const userRef = await doc(db, "users", `${user.uid}`);
 
-        const slug = name.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();
+        const slug =
+          name.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase() + "-" + user.uid;
 
         await setDoc(userRef, {
           name,
@@ -151,7 +152,7 @@ export const googleAuthAsync = () => async (dispatch) => {
       const slug =
         user.displayName.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase() +
         "-" +
-        Date.now();
+        user.uid;
 
       await setDoc(userRef, {
         name: user.displayName,

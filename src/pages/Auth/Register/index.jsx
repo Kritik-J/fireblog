@@ -16,9 +16,7 @@ const Register = () => {
 
   const history = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error, message, isAuthenticated } = useSelector(
-    (state) => state.auth
-  );
+  const { loading, error, message } = useSelector((state) => state.auth);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -46,11 +44,7 @@ const Register = () => {
         dispatch(clearError());
       }, 3000);
     }
-
-    if (isAuthenticated) {
-      history(-1);
-    }
-  }, [error, message, dispatch, history, isAuthenticated]);
+  }, [error, message, dispatch, history]);
 
   return (
     <RegisterScreen
