@@ -37,6 +37,10 @@ export const getBlogsAsync = () => async (dispatch) => {
     const blogsList = await Promise.all(blogsData);
 
     dispatch(getBlogsSuccess(blogsList));
+
+    if (blogsList.length === 0) {
+      throw new Error("No blogs found");
+    }
   } catch (error) {
     console.log(error);
     dispatch(getBlogsFailure(error.message));
@@ -68,6 +72,10 @@ export const getBlogAsync = (slug) => async (dispatch) => {
     });
 
     const blog = await Promise.all(blogData);
+
+    if (blog.length === 0) {
+      throw new Error("Blog not found");
+    }
 
     dispatch(readBlogSuccess(blog[0]));
   } catch (error) {

@@ -21,7 +21,9 @@ export const createBlogAsync = (blog) => async (dispatch) => {
     const title = blog.get("title");
     const description = blog.get("description");
     const content = blog.get("content");
-    const slug = title.toLowerCase().replace(/ /g, "-") + "-" + Date.now();
+    // remove all special characters and spaces from title
+    const slug =
+      title.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase() + "-" + Date.now();
 
     const thumbnailURL = await uploadThumbnail(blog.get("thumbnail"));
 
@@ -50,7 +52,10 @@ export const createBlogAsync = (blog) => async (dispatch) => {
 
 // upload thumbnail to firebase storage
 const uploadThumbnail = async (thumbnail) => {
-  const thumbnailName = `${Date.now()}_${thumbnail.name}`;
+  const thumbnailName = `${thumbnail.name
+    .replace(/[^a-zA-Z0-9]/g, "-")
+    .toLowerCase()}-${Date.now()}`;
+
   const fileRef = ref(storage, `thumbnails/${thumbnailName}`);
 
   const thumbnailRef = await uploadBytes(fileRef, thumbnail)

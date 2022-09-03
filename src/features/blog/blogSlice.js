@@ -46,7 +46,7 @@ const blogSlice = createSlice({
       state.readBlogError = action.payload;
     },
 
-    clearError: (state) => {
+    clearBlogsError: (state) => {
       state.error = null;
     },
 
@@ -63,7 +63,7 @@ export const {
   readBlog,
   readBlogSuccess,
   readBlogFailure,
-  clearError,
+  clearBlogsError,
   clearReadBlogError,
 } = blogSlice.actions;
 

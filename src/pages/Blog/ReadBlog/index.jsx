@@ -3,19 +3,27 @@ import styled from "styled-components/macro";
 import Left from "./Left";
 import Right from "./Right";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getBlogAsync } from "../../../features/blog/blogAPI";
+import { clearReadBlogError } from "../../../features/blog/blogSlice";
 
 const ReadBlog = () => {
   const { id } = useParams();
+  const history = useNavigate();
   const dispatch = useDispatch();
-  const { readBlog } = useSelector((state) => state.blog);
+  const { readBlog, readBlogError } = useSelector((state) => state.blog);
 
   React.useEffect(() => {
+    if (readBlogError) {
+      dispatch(clearReadBlogError()).then(() => {
+        history("/404");
+      });
+    }
+
     if (!readBlog || readBlog.slug !== id) {
       dispatch(getBlogAsync(id));
     }
-  }, [dispatch, id, readBlog]);
+  }, [dispatch, id, readBlog, readBlogError, history]);
 
   return (
     <ReadBlogScreen>

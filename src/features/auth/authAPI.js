@@ -64,9 +64,12 @@ export const registerAsync =
 
         const userRef = await doc(db, "users", `${user.uid}`);
 
+        const slug = name.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();
+
         await setDoc(userRef, {
-          name: name,
-          email: email,
+          name,
+          email,
+          slug,
           role: "user",
           photoURL: avatarURL,
           timestamp: Timestamp.fromDate(new Date()),
@@ -145,9 +148,15 @@ export const googleAuthAsync = () => async (dispatch) => {
     const isUserExists = await getDoc(userRef);
 
     if (!isUserExists.exists()) {
+      const slug =
+        user.displayName.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase() +
+        "-" +
+        Date.now();
+
       await setDoc(userRef, {
         name: user.displayName,
         email: user.email,
+        slug,
         role: "user",
         photoURL: user.photoURL,
         timestamp: Timestamp.fromDate(new Date()),

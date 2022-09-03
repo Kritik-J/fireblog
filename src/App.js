@@ -14,6 +14,7 @@ import ReadBlog from "./pages/Blog/ReadBlog";
 import { loadUserAsync } from "./features/auth/authAPI";
 import { useDispatch } from "react-redux";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import Error404 from "./pages/Error/Error404";
 // import Profile from "./pages/Profile";
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </Router>
     </div>
