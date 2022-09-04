@@ -24,9 +24,9 @@ const Header = () => {
         {/* <NavbarSearch></NavbarSearch> */}
 
         <NavbarLinks>
-          <NavLinkElement to="/create-blog">Create Blog</NavLinkElement>
           <NavLinkElement to="/about">About</NavLinkElement>
           <NavLinkElement to="/contact">Contact</NavLinkElement>
+          <WriteButton to="/create-blog">Write</WriteButton>
           {isAuthenticated ? (
             <Avatar
               src={user.photoURL}
@@ -132,6 +132,19 @@ const Avatar = styled.img`
   @media (max-width: 768px) {
     height: 3.2rem;
     width: 3.2rem;
+  }
+`;
+
+const WriteButton = styled(NavLinkElement)`
+  color: var(--secondary);
+  padding: 0.6rem 1.4rem;
+  border-radius: 4rem;
+  border: none;
+  border: 1px solid var(--secondary);
+
+  &:hover {
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.4);
+    cursor: pointer;
   }
 `;
 

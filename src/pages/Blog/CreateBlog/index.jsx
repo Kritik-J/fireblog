@@ -156,6 +156,10 @@ const CreateBlog = () => {
           <p className="preview__content__description">
             {description ? description : "Description goes here"}
           </p>
+
+          <p className="preview__content__description">
+            {content ? content : "Content goes here"}
+          </p>
         </div>
       </BlogPreviewContainer>
     </CreateBlogScreen>
