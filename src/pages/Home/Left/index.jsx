@@ -4,7 +4,7 @@ import SearchBlock from "./SearchBlock";
 const Left = () => {
   return (
     <div className="h-full relative">
-      <div className="sticky top-[7rem] left-0 right-0 sm:relative sm:top-0">
+      <div className="sticky top-[8rem] left-0 right-0 sm:relative sm:top-0">
         <SearchBlock />
       </div>
     </div>

@@ -150,15 +150,15 @@ const CreateBlog = () => {
         </div>
         <div className="preview__content">
           <h2 className="preview__content__title">
-            {title ? title : "Title goes here"}
+            {title ? title : "Title goes here ..."}
           </h2>
 
           <p className="preview__content__description">
-            {description ? description : "Description goes here"}
+            {description ? description : "Description goes here ..."}
           </p>
 
           <p className="preview__content__description">
-            {content ? content : "Content goes here"}
+            {content ? content : "Content goes here ..."}
           </p>
         </div>
       </BlogPreviewContainer>
@@ -267,6 +267,12 @@ const CreateBlogContainer = styled.div`
   }
 
   @media (max-width: 768px) {
+    padding: 0;
+    padding-bottom: 4rem;
+    background: transparent;
+    box-shadow: none;
+    border-bottom: 0.1rem solid #eaeaea;
+
     .form__title {
       font-size: 2rem;
     }

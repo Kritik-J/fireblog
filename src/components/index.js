@@ -11,3 +11,7 @@ export { default as BlogBlock } from "./blocks/BlogBlock";
 // menus
 
 export { default as ProfileMenu } from "./menus/ProfileMenu";
+
+// lazy load
+
+export { default as LazyBlogBlock } from "./lazyloads/LazyBlogBlock";

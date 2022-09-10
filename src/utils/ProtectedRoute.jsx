@@ -18,7 +18,7 @@ const ProtectedRoute = ({
       return <Navigate to={`${redirectLogin}`} />;
     }
     if (!userLoading && adminRoute && user.role !== "adnmin") {
-      return <Navigate to={`${redirectHome}`} replace />;
+      return <Navigate to={`${redirectHome}`} />;
     }
   }
 

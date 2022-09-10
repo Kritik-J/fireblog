@@ -15,7 +15,7 @@ import { loadUserAsync } from "./features/auth/authAPI";
 import { useDispatch } from "react-redux";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Error404 from "./pages/Error/Error404";
-// import Profile from "./pages/Profile";
+import Profile from "./pages/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ function App() {
 
             <Route element={<ProtectedRoute />}>
               <Route path="/create-blog" element={<CreateBlog />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
           </Route>
 

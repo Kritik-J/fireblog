@@ -1,14 +1,17 @@
 import React from "react";
-import { BlogBlock, Loader } from "../../../components";
+import { LazyBlogBlock, Loader } from "../../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogsAsync } from "../../../features/blog/blogAPI";
 import { clearBlogsError } from "../../../features/blog/blogSlice";
+import { Suspense, lazy } from "react";
 
 const Center = () => {
   const dispatch = useDispatch();
   const { blogs, loading, error, blogsNotFound } = useSelector(
     (state) => state.blog
   );
+
+  const BlogBlock = lazy(() => import("../../../components/blocks/BlogBlock"));
 
   React.useEffect(() => {
     if (error) {
@@ -33,7 +36,11 @@ const Center = () => {
         ) : (
           <>
             {blogs &&
-              blogs.map((blog) => <BlogBlock key={blog.id} blog={blog} />)}
+              blogs.map((blog) => (
+                <Suspense key={blog.id} fallback={<LazyBlogBlock />}>
+                  <BlogBlock blog={blog} />
+                </Suspense>
+              ))}
           </>
         )}
       </div>
