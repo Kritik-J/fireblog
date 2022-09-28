@@ -19,7 +19,6 @@ export const createBlogAsync = (blog) => async (dispatch) => {
     const authorRef = doc(db, `users/${author_uid}`);
 
     const title = blog.get("title");
-    const description = blog.get("description");
     const content = blog.get("content");
     // remove all special characters and spaces from title
     const slug =
@@ -37,7 +36,6 @@ export const createBlogAsync = (blog) => async (dispatch) => {
     await setDoc(blogRef, {
       slug,
       title,
-      description,
       content,
       thumbnailURL,
       author: authorRef,

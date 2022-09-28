@@ -30,8 +30,6 @@ const BlogContainer = ({ blog }) => {
 
         <h2 className="blog__title">{blog.title}</h2>
 
-        <p className="blog__description"> {blog.description} </p>
-
         <div className="blog__content">{blog.content}</div>
       </ContentWrapper>
     </BlogWrapper>

@@ -4,6 +4,7 @@ import {
   getDoc,
   getDocs,
   limit,
+  orderBy,
   query,
   where,
 } from "firebase/firestore";
@@ -20,11 +21,11 @@ import {
 export const getBlogsAsync = () => async (dispatch) => {
   dispatch(getBlogs());
   try {
-    const blogs = await getDocs(collection(db, "blogs"));
+    const blogsDoc = await getDocs(collection(db, "blogs"));
 
-    const blogsData = blogs.docs.map(async (blog) => {
+    const blogsData = blogsDoc.docs.map(async (blog) => {
       const author = await getDoc(doc(db, "users", blog.data().author.id));
-
+      
       blog = {
         ...blog.data(),
         id: blog.id,
@@ -34,11 +35,33 @@ export const getBlogsAsync = () => async (dispatch) => {
       return blog;
     });
 
-    const blogsList = await Promise.all(blogsData);
+    
+    const recommendedBlogsDoc = await getDocs(
+      query(collection(db, "blogs"), 
+        orderBy("timestamp", "asc"),
+        limit(3)
+      )
+    )
+    const blogs = await Promise.all(blogsData);
 
-    dispatch(getBlogsSuccess(blogsList));
+    const recommendedBlogsData = recommendedBlogsDoc.docs.map(async (blog) => {
 
-    if (blogsList.length === 0) {
+      blog = {
+        title: blog.data().title,
+        slug: blog.data().slug,
+        id: blog.id,
+      }
+
+      return blog;
+    });
+
+    const recommendedBlogs = await Promise.all(recommendedBlogsData);
+
+
+
+    dispatch(getBlogsSuccess({ blogs, recommendedBlogs }));
+
+    if (blogs.length === 0) {
       throw new Error("No blogs found");
     }
   } catch (error) {

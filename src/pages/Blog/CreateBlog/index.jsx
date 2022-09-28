@@ -10,7 +10,6 @@ import {
 
 const CreateBlog = () => {
   const [title, setTitle] = React.useState("");
-  const [description, setDescription] = React.useState("");
   const [thumbnail, setThumbnail] = React.useState("");
   const [content, setContent] = React.useState("");
   const thumbnailRef = React.useRef(null);
@@ -22,7 +21,6 @@ const CreateBlog = () => {
     const blogData = new FormData();
 
     blogData.append("title", title);
-    blogData.append("description", description);
     blogData.append("thumbnail", thumbnail);
     blogData.append("content", content);
 
@@ -30,7 +28,6 @@ const CreateBlog = () => {
     dispatch(createBlogAsync(blogData));
 
     setTitle("");
-    setDescription("");
     setThumbnail("");
     setContent("");
     thumbnailRef.current.value = "";
@@ -70,20 +67,6 @@ const CreateBlog = () => {
             maxLength="100"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-          />
-
-          <label htmlFor="description" className="form__label">
-            Description
-          </label>
-          <textarea
-            id="description"
-            className="form__input"
-            rows="3"
-            cols="50"
-            required
-            maxLength="200"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
           />
 
           <label className="form__label">Thumbnail</label>
@@ -152,10 +135,6 @@ const CreateBlog = () => {
           <h2 className="preview__content__title">
             {title ? title : "Title goes here ..."}
           </h2>
-
-          <p className="preview__content__description">
-            {description ? description : "Description goes here ..."}
-          </p>
 
           <p className="preview__content__description">
             {content ? content : "Content goes here ..."}

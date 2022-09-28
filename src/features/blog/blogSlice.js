@@ -5,7 +5,7 @@ const initialState = {
   blogs: [],
   error: null,
   blogsNotFound: false,
-
+  recommendedBlogs: [],
   readBlogLoading: false,
   readBlog: null,
   readBlogError: null,
@@ -25,7 +25,8 @@ const blogSlice = createSlice({
     getBlogsSuccess: (state, action) => {
       state.loading = false;
       state.error = null;
-      state.blogs = action.payload;
+      state.blogs = action.payload.blogs;
+      state.recommendedBlogs = action.payload.recommendedBlogs;
       state.blogsNotFound = false;
     },
 

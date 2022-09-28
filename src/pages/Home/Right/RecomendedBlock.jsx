@@ -1,17 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components/macro";
 
 const RecomendedBlock = () => {
+  const { recommendedBlogs } = useSelector((state) => state.blog);
+
   return (
     <RecommendedContainer className="bg-green-500">
       <h1 className="recommended__header">Recommended Blogs</h1>
 
       <ul className="recommended__list">
-        <li>Web Development</li>
-        <li>Web Development</li>
-        <li>Web Development</li>
-        <li>Web Development</li>
-        <li>Web Development</li>
+        {recommendedBlogs &&
+          recommendedBlogs.map((blog) => (
+            <li key={blog.id} className="recommended__item">
+              <Link to={`/blog/${blog.slug}`}>
+                {blog.title.length > 64
+                  ? blog.title.slice(0, 64) + ".."
+                  : blog.title}
+              </Link>
+            </li>
+          ))}
       </ul>
     </RecommendedContainer>
   );
@@ -33,13 +42,14 @@ const RecommendedContainer = styled.div`
   .recommended__list {
     padding: 1rem;
 
-    li {
+    .recommended__item {
       font-size: 1.4rem;
       font-weight: 500;
-      margin-bottom: 0.5rem;
+      padding: 0.8rem 0.4rem;
+      border-bottom: 0.1rem solid #eaeaea;
 
       &:last-child {
-        margin-bottom: 0;
+        border-bottom: none;
       }
     }
   }
@@ -50,7 +60,7 @@ const RecommendedContainer = styled.div`
     }
 
     .recommended__list {
-      li {
+      .recommended__item {
         font-size: 1.25rem;
       }
     }
