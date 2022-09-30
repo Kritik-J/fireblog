@@ -7,7 +7,7 @@ const RecomendedBlock = () => {
   const { recommendedBlogs } = useSelector((state) => state.blog);
 
   return (
-    <RecommendedContainer className="bg-green-500">
+    <RecommendedContainer className="">
       <h1 className="recommended__header">Recommended Blogs</h1>
 
       <ul className="recommended__list">

@@ -21,6 +21,10 @@ const WidgetBlock = () => {
               </Link>
             </li>
           ))}
+
+        {recommendedBlogs.length === 0 && (
+          <li className="widget__item">No Recommendations</li>
+        )}
       </ul>
     </WidgetContainer>
   );

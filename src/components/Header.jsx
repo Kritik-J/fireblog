@@ -18,14 +18,15 @@ const Header = () => {
     <HeaderContainer>
       <Navbar>
         <NavLinkElement to="/">
-          <img className="navbar__logo" src="" alt="logo" />
+          {/* <img className="navbar__logo" src="" alt="logo" /> */}
+          <h2 className="navbar__logo">🔥FireBlog</h2>
         </NavLinkElement>
 
         {/* <NavbarSearch></NavbarSearch> */}
 
         <NavbarLinks>
-          <NavLinkElement to="/about">About</NavLinkElement>
-          <NavLinkElement to="/contact">Contact</NavLinkElement>
+          {/* <NavLinkElement to="/about">About</NavLinkElement>
+          <NavLinkElement to="/contact">Contact</NavLinkElement> */}
           <WriteButton to="/create-blog">Write</WriteButton>
           {isAuthenticated ? (
             <Avatar
@@ -68,11 +69,16 @@ const Navbar = styled.nav`
   align-items: center;
 
   .navbar__logo {
-    height: 2.8rem;
+    font-size: 2.4rem;
+    color: #000;
   }
 
   @media (max-width: 768px) {
     padding: 0 2rem;
+
+    .navbar__logo {
+      font-size: 1.8rem;
+    }
   }
 `;
 
