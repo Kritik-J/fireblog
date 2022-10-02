@@ -30,7 +30,11 @@ const BlogContainer = ({ blog }) => {
 
         <h2 className="blog__title">{blog.title}</h2>
 
-        <div className="blog__content">{blog.content}</div>
+        <div className="blog__content">
+          {blog.content.split("\n").map((str, index) => (
+            <p key={index}>{str}</p>
+          ))}
+        </div>
       </ContentWrapper>
     </BlogWrapper>
   );
@@ -105,7 +109,9 @@ const ContentWrapper = styled.div`
   }
 
   .blog__content {
-    font-size: 1.6rem;
+    p {
+      font-size: 1.6rem;
+    }
   }
 
   @media (max-width: 768px) {
@@ -122,7 +128,9 @@ const ContentWrapper = styled.div`
     }
 
     .blog__content {
-      font-size: 1.4rem;
+      p {
+        font-size: 1.4rem;
+      }
     }
   }
 `;
