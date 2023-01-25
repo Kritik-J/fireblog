@@ -58,7 +58,7 @@ const BlogContainer = styled.div`
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-gap: 1rem;
-  padding: 2rem;
+  padding: 2rem 0;
   border-bottom: 0.1rem solid #eaeaea;
 
   &:last-child {

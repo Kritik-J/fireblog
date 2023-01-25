@@ -43,56 +43,49 @@ const ForgotPassword = () => {
   }, [error, message, dispatch, history]);
 
   return (
-    <ForgotPasswordScreen
-      style={{
-        backgroundImage: `url(${require("../../../assets/images/bg2.jpg")})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-      }}
-    >
+    <ForgotPasswordScreen>
       <ForgotPasswordContainer>
-        {loading && <Loader position="absolute" radius="0.4rem 0.4rem 0 0" />}
+        {loading && <Loader position='absolute' radius='0.4rem 0.4rem 0 0' />}
 
-        <form onSubmit={handleForgotPassword} className="form">
-          <h1 className="form__title">Forgot Password</h1>
-          <label className="form__label" htmlFor="email">
+        <form onSubmit={handleForgotPassword} className='form'>
+          <h1 className='form__title'>Forgot Password</h1>
+          <label className='form__label' htmlFor='email'>
             Email
           </label>
           <input
-            className="form__input"
-            type="email"
-            name="email"
-            id="email"
+            className='form__input'
+            type='email'
+            name='email'
+            id='email'
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <label className="form__label" htmlFor="confirmEmail">
+          <label className='form__label' htmlFor='confirmEmail'>
             Confirm Email
           </label>
           <input
-            className="form__input"
-            type="email"
-            name="confirmEmail"
-            id="confirmEmail"
+            className='form__input'
+            type='email'
+            name='confirmEmail'
+            id='confirmEmail'
             required
             value={confirmEmail}
             onChange={(e) => setConfirmEmail(e.target.value)}
           />
 
-          <button className="form__button">Send</button>
+          <button className='form__button'>Send</button>
         </form>
 
-        <div className="form__links">
-          <Link to="/register">Not registered yet?</Link>
-          <Link to="/login">Already registered?</Link>
+        <div className='form__links'>
+          <Link to='/register'>Not registered yet?</Link>
+          <Link to='/login'>Already registered?</Link>
         </div>
 
-        {error && <Alert status="error">{error}</Alert>}
+        {error && <Alert status='error'>{error}</Alert>}
 
-        {message && <Alert status="info">{message}</Alert>}
+        {message && <Alert status='info'>{message}</Alert>}
       </ForgotPasswordContainer>
     </ForgotPasswordScreen>
   );
@@ -105,6 +98,11 @@ const ForgotPasswordScreen = styled.div`
   align-items: center;
   justify-content: center;
   padding: 4rem;
+
+  background-image: url("/images/bg.svg");
+  background-size: "cover";
+  background-repeat: "no-repeat";
+  background-position: "center";
 
   @media (max-width: 768px) {
     padding: 2rem;

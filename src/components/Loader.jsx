@@ -4,11 +4,7 @@ import styled from "styled-components/macro";
 const Loader = ({ position, radius }) => {
   return (
     <LoaderContainer position={position} radius={radius}>
-      <div
-        className="indeterminate
-        bg-teal-200
-      "
-      ></div>
+      <div className='indeterminate bg-teal-100'></div>
     </LoaderContainer>
   );
 };
@@ -35,7 +31,7 @@ const LoaderContainer = styled.div`
     position: absolute;
     height: 100%;
     /* background-color: #03a9f4; */
-    background-color: #00d8bb;
+    background-color: #01bda4;
 
     animation: indeterminate_first 2.5s infinite ease-out;
   }

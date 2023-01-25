@@ -47,93 +47,94 @@ const Register = () => {
   }, [error, message, dispatch, history]);
 
   return (
-    <RegisterScreen
-      style={{
-        backgroundImage: `url(${require("../../../assets/images/bg2.jpg")})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-      }}
-    >
+    <RegisterScreen>
       <RegisterContainer>
-        {loading && <Loader position="absolute" radius="0.4rem 0.4rem 0 0" />}
+        {loading && <Loader position='absolute' radius='0.4rem 0.4rem 0 0' />}
 
-        <form onSubmit={handleRegister} className="form">
-          <h1 className="form__title">Register</h1>
+        <form onSubmit={handleRegister} className='form'>
+          <h1 className='form__title'>Register</h1>
 
-          <label className="form__label" htmlFor="name">
+          <label className='form__label' htmlFor='name'>
             Name
           </label>
           <input
-            className="form__input"
-            type="text"
-            name="name"
+            className='form__input'
+            type='text'
+            name='name'
             required
-            id="name"
+            id='name'
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
-          <label className="form__label" htmlFor="email">
+          <label className='form__label' htmlFor='email'>
             Email
           </label>
           <input
-            className="form__input"
-            type="email"
-            name="email"
+            className='form__input'
+            type='email'
+            name='email'
             required
-            id="email"
+            id='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <label className="form__label" htmlFor="password">
+          <label className='form__label' htmlFor='password'>
             Password
           </label>
           <input
-            className="form__input"
-            type="password"
-            name="password"
-            id="password"
+            className='form__input'
+            type='password'
+            name='password'
+            id='password'
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <label className="form__label" htmlFor="confirmPassword">
+          <label className='form__label' htmlFor='confirmPassword'>
             Confirm Password
           </label>
           <input
-            className="form__input"
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
+            className='form__input'
+            type='password'
+            name='confirmPassword'
+            id='confirmPassword'
             required
             value={passwordConfirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}
           />
 
-          <button className="form__button">Register</button>
+          <button className='form__button'>Register</button>
         </form>
 
-        <div className="flex items-center my-[1rem] before:flex-1 before:border-t before:border-gray-400 before:mt-0.5 after:flex-1 after:border-t after:border-gray-400 after:mt-0.5">
-          <p className="text-center text-[1.4rem] sm:text-[1.2rem] font-semibold mx-[1rem] mb-0">
+        <div className='flex items-center my-[1rem] before:flex-1 before:border-t before:border-gray-400 before:mt-0.5 after:flex-1 after:border-t after:border-gray-400 after:mt-0.5'>
+          <p className='text-center text-[1.4rem] sm:text-[1.2rem] font-semibold mx-[1rem] mb-0'>
             OR
           </p>
         </div>
 
-        <button className="google__button" onClick={handleGoogleAuth}>
-          <img src={GoogleIcon} alt="google-icon" />
+        <button className='google__button' onClick={handleGoogleAuth}>
+          <img src={GoogleIcon} alt='google-icon' />
           Continue with Google
         </button>
 
-        <div className="form__links">
-          <Link to="/login">Already registered?</Link>
+        <div className='form__links'>
+          <p className='form__link'>
+            <Link to='/login'>Already registered?</Link>
+          </p>
+
+          <p className='form__link'>
+            By registering, you agree to our{" "}
+            <Link to='/terms'>Terms of Service</Link> and{" "}
+            <Link to='/privacy'>Privacy Policy</Link>
+          </p>
         </div>
 
-        {error && <Alert status="error">{error}</Alert>}
+        {error && <Alert status='error'>{error}</Alert>}
 
-        {message && <Alert status="success">{message}</Alert>}
+        {message && <Alert status='success'>{message}</Alert>}
       </RegisterContainer>
     </RegisterScreen>
   );
@@ -146,6 +147,11 @@ const RegisterScreen = styled.div`
   align-items: center;
   justify-content: center;
   padding: 4rem;
+
+  background-image: url("/images/bg.svg");
+  background-size: "cover";
+  background-repeat: "no-repeat";
+  background-position: "center";
 
   @media (max-width: 768px) {
     padding: 2rem;
@@ -204,17 +210,22 @@ const RegisterContainer = styled.div`
 
   .form__links {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
 
-    a {
-      font-size: 1.6rem;
+    .form__link {
+      font-size: 1.4rem;
       font-weight: 600;
-      color: var(--secondary);
+      text-align: center;
+      margin-top: 1rem;
 
-      &:hover {
-        text-decoration: underline;
+      a {
+        color: var(--secondary);
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -246,9 +257,15 @@ const RegisterContainer = styled.div`
 
     .form__label,
     .form__input,
-    .form__button,
-    .form__links a {
+    .form__button {
       font-size: 1.4rem;
+    }
+
+    .form__links {
+      .form__link {
+        font-size: 1.25rem;
+        margin-top: 0.4rem;
+      }
     }
 
     .google__button {

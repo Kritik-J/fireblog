@@ -48,52 +48,45 @@ const ResetPassword = () => {
   }, [error, message, dispatch, history]);
 
   return (
-    <ResetPasswordScreen
-      style={{
-        backgroundImage: `url(${require("../../../assets/images/bg2.jpg")})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-      }}
-    >
+    <ResetPasswordScreen>
       <ResetPasswordContainer>
-        {loading && <Loader position="absolute" radius="0.4rem 0.4rem 0 0" />}
+        {loading && <Loader position='absolute' radius='0.4rem 0.4rem 0 0' />}
 
-        <form onSubmit={handleResetPassword} className="form">
-          <h1 className="form__title">Reset Password</h1>
+        <form onSubmit={handleResetPassword} className='form'>
+          <h1 className='form__title'>Reset Password</h1>
 
-          <label className="form__label" htmlFor="password">
+          <label className='form__label' htmlFor='password'>
             Password
           </label>
           <input
-            className="form__input"
-            type="password"
-            name="password"
-            id="password"
+            className='form__input'
+            type='password'
+            name='password'
+            id='password'
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <label className="form__label" htmlFor="confirmPassword">
+          <label className='form__label' htmlFor='confirmPassword'>
             Confirm Password
           </label>
           <input
-            className="form__input"
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
+            className='form__input'
+            type='password'
+            name='confirmPassword'
+            id='confirmPassword'
             required
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <button className="form__button">Reset</button>
+          <button className='form__button'>Reset</button>
         </form>
 
-        {error && <Alert status="error">{error}</Alert>}
+        {error && <Alert status='error'>{error}</Alert>}
 
-        {message && <Alert status="success">{message}</Alert>}
+        {message && <Alert status='success'>{message}</Alert>}
       </ResetPasswordContainer>
     </ResetPasswordScreen>
   );
@@ -106,6 +99,11 @@ const ResetPasswordScreen = styled.div`
   align-items: center;
   justify-content: center;
   padding: 4rem;
+
+  background-image: url("/images/bg.svg");
+  background-size: "cover";
+  background-repeat: "no-repeat";
+  background-position: "center";
 
   @media (max-width: 768px) {
     padding: 2rem;

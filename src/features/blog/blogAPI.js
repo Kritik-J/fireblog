@@ -25,7 +25,7 @@ export const getBlogsAsync = () => async (dispatch) => {
 
     const blogsData = blogsDoc.docs.map(async (blog) => {
       const author = await getDoc(doc(db, "users", blog.data().author.id));
-      
+
       blog = {
         ...blog.data(),
         id: blog.id,
@@ -35,29 +35,22 @@ export const getBlogsAsync = () => async (dispatch) => {
       return blog;
     });
 
-    
     const recommendedBlogsDoc = await getDocs(
-      query(collection(db, "blogs"), 
-        orderBy("timestamp", "asc"),
-        limit(3)
-      )
-    )
+      query(collection(db, "blogs"), orderBy("timestamp", "asc"), limit(3))
+    );
     const blogs = await Promise.all(blogsData);
 
     const recommendedBlogsData = recommendedBlogsDoc.docs.map(async (blog) => {
-
       blog = {
         title: blog.data().title,
         slug: blog.data().slug,
         id: blog.id,
-      }
+      };
 
       return blog;
     });
 
     const recommendedBlogs = await Promise.all(recommendedBlogsData);
-
-
 
     dispatch(getBlogsSuccess({ blogs, recommendedBlogs }));
 

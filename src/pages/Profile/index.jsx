@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 // import AlternateBanner from "../../assets/images/alternate-banner.jpg";
 import AlternateBanner from "../../assets/images/banner.svg";
 import EditIcon from "../../assets/icons/edit.svg";
+// import { BlogBlock } from "../../components";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
@@ -13,24 +14,24 @@ const Profile = () => {
       <LeftContainer>
         <ProfileInfo>
           <ProfileBanner></ProfileBanner>
-          <div className="absolute right-8 top-8 p-2 bg-[color:var(--secondary)] border-[0.1rem] border-[#eaeaea] text-white rounded-full hover:cursor-pointer z-20">
-            <img src={EditIcon} alt="" />
+          <div className='absolute right-8 top-8 p-2 bg-[color:var(--secondary)] border-[0.1rem] border-[#eaeaea] text-white rounded-full hover:cursor-pointer z-20'>
+            <img src={EditIcon} alt='' />
           </div>
           <ProfileInfoContainer>
-            <img src={user.photoURL} alt={user.name} className="profile-pic" />
+            <img src={user.photoURL} alt={user.name} className='profile-pic' />
 
-            <div className="flex items-start justify-between">
+            <div className='flex items-start justify-between'>
               <div>
-                <h1 className="profile-name">{user.name}</h1>
+                <h1 className='profile-name'>{user.name}</h1>
 
-                <h3 className="profile-email">{user.email}</h3>
+                <h3 className='profile-email'>{user.email}</h3>
 
-                <p className="profile-bio">
+                <p className='profile-bio'>
                   {user.bio ? user.bio : "No bio yet"}
                 </p>
               </div>
 
-              <button className="bg-[color:var(--secondary)] px-4 py-2 lg:text-[1.25rem] text-[1.4rem] border-[0.1rem] border-[#eaeaea] text-white rounded-full hover:cursor-pointer">
+              <button className='bg-[color:var(--secondary)] px-4 py-2 lg:text-[1.25rem] text-[1.4rem] border-[0.1rem] border-[#eaeaea] text-white rounded-full hover:cursor-pointer'>
                 Edit Profile
               </button>
             </div>
@@ -61,10 +62,6 @@ const ProfileScreen = styled.div`
 
 const LeftContainer = styled.div`
   grid-column: span 8 / span 8;
-`;
-
-const RightContainer = styled.div`
-  grid-column: span 4 / span 4;
 `;
 
 const ProfileInfo = styled.div`
@@ -144,6 +141,10 @@ const ProfileInfoContainer = styled.div`
       font-size: 1.25rem;
     }
   }
+`;
+
+const RightContainer = styled.div`
+  grid-column: span 4 / span 4;
 `;
 
 export default Profile;

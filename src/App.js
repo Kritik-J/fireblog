@@ -15,7 +15,7 @@ import { loadUserAsync } from "./features/auth/authAPI";
 import { useDispatch } from "react-redux";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Error404 from "./pages/Error/Error404";
-import Profile from "./pages/Profile";
+// import Profile from "./pages/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,27 +25,26 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
+    <div className='App'>
       <Router>
         <Routes>
           <Route element={<GeneralLayout />}>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path='/' element={<Home />} />
             {/* <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} /> */}
-            <Route path="/blog/:id" element={<ReadBlog />} />
 
             <Route element={<ProtectedRoute />}>
-              <Route path="/create-blog" element={<CreateBlog />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path='/blog/:id' element={<ReadBlog />} />
+              <Route path='/create-blog' element={<CreateBlog />} />
             </Route>
           </Route>
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
 
-          <Route path="*" element={<Error404 />} />
+          <Route path='*' element={<Error404 />} />
         </Routes>
       </Router>
     </div>

@@ -18,19 +18,15 @@ const Center = () => {
       dispatch(clearBlogsError());
     }
 
-    if (!blogsNotFound) {
-      if (blogs.length === 0) {
-        dispatch(getBlogsAsync());
-      }
-    }
-  }, [dispatch, error, blogs, blogsNotFound]);
+    dispatch(getBlogsAsync());
+  }, [dispatch, error]);
 
   return (
     <>
       {loading && <Loader />}
-      <div className="h-full relative ">
+      <div className='h-full relative px-[2rem]'>
         {blogsNotFound ? (
-          <div className="text-center text-2xl font-bold text-gray-500 pt-8">
+          <div className='text-center text-2xl font-bold text-gray-500 pt-8'>
             No blogs found
           </div>
         ) : (

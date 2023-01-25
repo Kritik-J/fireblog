@@ -7,19 +7,24 @@ const RecomendedBlock = () => {
   const { recommendedBlogs } = useSelector((state) => state.blog);
 
   return (
-    <RecommendedContainer className="">
-      <h1 className="recommended__header">Recommended Blogs</h1>
+    <RecommendedContainer className=''>
+      <h1 className='recommended__header'>Recommended Blogs</h1>
 
-      <ul className="recommended__list">
+      <ul className='recommended__list'>
         {recommendedBlogs &&
           recommendedBlogs.map((blog) => (
-            <li key={blog.id} className="recommended__item">
+            <li key={blog.id} className='recommended__item'>
               <Link to={`/blog/${blog.slug}`}>
                 {blog.title.length > 64
                   ? blog.title.slice(0, 64) + ".."
                   : blog.title}
               </Link>
             </li>
+          ))}
+
+        {!recommendedBlogs ||
+          (recommendedBlogs.length === 0 && (
+            <li className='recommended__item'>No blogs found</li>
           ))}
       </ul>
     </RecommendedContainer>

@@ -21,17 +21,17 @@ const ProfileMenu = () => {
 
       <ProfileMenuItem
         onClick={() => {
-          history("/profile");
+          history("/");
           dispatch(closeProfileMenu());
         }}
       >
         Signed in as&nbsp;
-        <span className="">{user.name}</span>
+        <span className=''>{user.name}</span>
       </ProfileMenuItem>
 
       <ProfileMenuItem
         onClick={() => {
-          history("/profile");
+          history("/");
           dispatch(closeProfileMenu());
         }}
       >

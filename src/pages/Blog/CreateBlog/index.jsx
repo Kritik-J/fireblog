@@ -50,93 +50,103 @@ const CreateBlog = () => {
   return (
     <CreateBlogScreen>
       <CreateBlogContainer>
-        {loading && <Loader position="absolute" radius="0.4rem 0.4rem 0 0" />}
+        {loading && <Loader position='absolute' radius='0.4rem 0.4rem 0 0' />}
 
-        <h1 className="form__title">Create Blog</h1>
+        <h1 className='form__title'>Create Blog</h1>
 
-        <form className="form" onSubmit={handleSubmit}>
-          <label htmlFor="title" className="form__label">
+        <form className='form' onSubmit={handleSubmit}>
+          <label className='form__label'>Thumbnail</label>
+
+          <label htmlFor='dropzone_image' className='w-full'>
+            <div
+              className={`file__input__container relative
+    ${thumbnail ? "file__input__container--active" : ""}`}
+            >
+              <p className='file__input__text'>
+                <span className='font-semibold'>Click to upload</span> or drag
+                and drop
+              </p>
+
+              <input
+                id='dropzone_image'
+                type='file'
+                className='absolute w-full h-full opacity-0 cursor-pointer'
+                name='image'
+                accept='image/*'
+                required
+                onChange={(e) => setThumbnail(e.target.files[0])}
+                ref={thumbnailRef}
+              />
+
+              {thumbnail && (
+                <p className='mt-3 text-gray-800 md:text-lg text-xl'>
+                  Selected file:{" "}
+                  {thumbnail.name.length > 20
+                    ? thumbnail.name.slice(0, 20) + "..."
+                    : thumbnail.name}
+                </p>
+              )}
+            </div>
+          </label>
+
+          <label htmlFor='title' className='form__label'>
             Title
           </label>
           <input
-            type="text"
-            id="title"
-            className="form__input"
+            type='text'
+            id='title'
+            className='form__input'
             required
-            minLength="32"
-            maxLength="100"
+            minLength='32'
+            maxLength='100'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <label className="form__label">Thumbnail</label>
-
-          <label htmlFor="dropzone-image" className="w-full">
-            <div
-              className={`file__input__container 
-              ${thumbnail ? "file__input__container--active" : ""}`}
-            >
-              <p className="file__input__text">
-                <span className="font-semibold">Click to upload</span> or drag
-                and drop
-              </p>
-            </div>
-
-            <input
-              id="dropzone-image"
-              type="file"
-              className="hidden"
-              name="image"
-              accept="image/*"
-              required
-              onChange={(e) => setThumbnail(e.target.files[0])}
-              ref={thumbnailRef}
-            />
-          </label>
           {/* rich text editor */}
-          <label htmlFor="content" className="form__label">
+          <label htmlFor='content' className='form__label'>
             Content
           </label>
 
           <textarea
-            id="content"
-            className="form__input"
-            rows="3"
-            cols="50"
+            id='content'
+            className='form__input'
+            rows='3'
+            cols='50'
             required
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
 
-          <button type="submit" className="form__button">
+          <button type='submit' className='form__button'>
             Create
           </button>
         </form>
 
-        {error && <Alert status="error">{error}</Alert>}
+        {error && <Alert status='error'>{error}</Alert>}
 
-        {message && <Alert status="success">{message}</Alert>}
+        {message && <Alert status='success'>{message}</Alert>}
       </CreateBlogContainer>
 
       <BlogPreviewContainer>
-        <h1 className="preview__title">Preview</h1>
+        <h1 className='preview__title'>Preview</h1>
 
-        <div className="preview__thumbnail">
+        <div className='preview__thumbnail'>
           <img
             src={
               thumbnail
                 ? URL.createObjectURL(thumbnail)
                 : "https://via.placeholder.com/200x200"
             }
-            alt="thumbnail"
+            alt='thumbnail'
           />
         </div>
-        <div className="preview__content">
-          <h2 className="preview__content__title">
+        <div className='preview__content'>
+          <h2 className='preview__content__title'>
             {title ? title : "Title goes here ..."}
           </h2>
 
-          <p className="preview__content__description">
+          <p className='preview__content__description'>
             {content ? content : "Content goes here ..."}
           </p>
         </div>

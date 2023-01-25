@@ -17,9 +17,9 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Navbar>
-        <NavLinkElement to="/">
+        <NavLinkElement to='/'>
           {/* <img className="navbar__logo" src="" alt="logo" /> */}
-          <h2 className="navbar__logo">🔥FireBlog</h2>
+          <h2 className='navbar__logo'>🔥Fireblog</h2>
         </NavLinkElement>
 
         {/* <NavbarSearch></NavbarSearch> */}
@@ -27,7 +27,7 @@ const Header = () => {
         <NavbarLinks>
           {/* <NavLinkElement to="/about">About</NavLinkElement>
           <NavLinkElement to="/contact">Contact</NavLinkElement> */}
-          <WriteButton to="/create-blog">Write</WriteButton>
+          <WriteButton to='/create-blog'>Write</WriteButton>
           {isAuthenticated ? (
             <Avatar
               src={user.photoURL}
@@ -71,6 +71,9 @@ const Navbar = styled.nav`
   .navbar__logo {
     font-size: 2.4rem;
     color: #000;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-weight: 700;
+    font-style: italic;
   }
 
   @media (max-width: 768px) {
