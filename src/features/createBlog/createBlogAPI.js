@@ -6,6 +6,7 @@ import {
 import { auth, db, storage } from "../../firebase";
 import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import generateSlug from "../../utils/generateSlug";
 
 export const createBlogAsync = (blog) => async (dispatch) => {
   dispatch(createBlogRequest());
@@ -20,23 +21,25 @@ export const createBlogAsync = (blog) => async (dispatch) => {
 
     const title = blog.get("title");
     const content = blog.get("content");
-    // remove all special characters and spaces from title
-    const slug =
-      title.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase() + "-" + Date.now();
+    const thumbnail = blog.get("thumbnail");
+    const slug = generateSlug(title);
 
-    const thumbnailURL = await uploadThumbnail(blog.get("thumbnail"));
+    const thumbnailURL = await uploadThumbnail(thumbnail);
 
     if (!thumbnailURL) {
       throw new Error("Can't create blog");
     }
 
+    const updatedContent = await findAndUploadImages(content, slug);
+
     // create new blog in firebase firestore
+
     const blogRef = doc(collection(db, "blogs"));
 
     await setDoc(blogRef, {
       slug,
       title,
-      content,
+      content: updatedContent,
       thumbnailURL,
       author: authorRef,
       timestamp: Timestamp.fromDate(new Date()),
@@ -50,9 +53,7 @@ export const createBlogAsync = (blog) => async (dispatch) => {
 
 // upload thumbnail to firebase storage
 const uploadThumbnail = async (thumbnail) => {
-  const thumbnailName = `${thumbnail.name
-    .replace(/[^a-zA-Z0-9]/g, "-")
-    .toLowerCase()}-${Date.now()}`;
+  const thumbnailName = generateSlug(thumbnail.name);
 
   const fileRef = ref(storage, `thumbnails/${thumbnailName}`);
 
@@ -70,4 +71,53 @@ const uploadThumbnail = async (thumbnail) => {
     const url = ref(storage, thumbnailRef);
     return await getDownloadURL(url);
   }
+};
+
+const findAndUploadImages = async (content, slug) => {
+  let newContent = content;
+
+  const regex = /<img[^>]+src="([^">]+)"/g;
+  let images = content.match(regex);
+
+  if (images) {
+    const promises = images.map(async (imgTag, index) => {
+      const src = imgTag.match(/src="([^"]+)"/)[1];
+
+      const blob = await fetch(src).then((r) => r.blob());
+
+      const file = new File([blob], `image.${blob.type.split("/")[1]}`, {
+        type: blob.type,
+        lastModified: Date.now(),
+      });
+
+      const imgName = generateSlug(
+        slug + index * Math.floor(Math.random() * 1000)
+      );
+
+      const fileRef = ref(storage, `images/${imgName}`);
+
+      const imgRef = await uploadBytes(fileRef, file)
+        .then((snapshot) => {
+          return snapshot.ref.fullPath;
+        })
+        .catch((error) => {
+          return null;
+        });
+
+      if (!imgRef) {
+        throw new Error("Can't create blog");
+      } else {
+        const url = ref(storage, imgRef);
+        const downloadURL = await getDownloadURL(url);
+
+        const newImgTag = imgTag.replace(src, downloadURL);
+
+        newContent = newContent.replace(imgTag, newImgTag);
+      }
+    });
+
+    await Promise.all(promises);
+  }
+
+  return newContent;
 };

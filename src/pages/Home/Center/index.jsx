@@ -14,17 +14,19 @@ const Center = () => {
   const BlogBlock = lazy(() => import("../../../components/blocks/BlogBlock"));
 
   React.useEffect(() => {
+    dispatch(getBlogsAsync());
+  }, [dispatch]);
+
+  React.useEffect(() => {
     if (error) {
       dispatch(clearBlogsError());
     }
-
-    dispatch(getBlogsAsync());
-  }, [dispatch, error]);
+  }, [error, dispatch]);
 
   return (
     <>
       {loading && <Loader />}
-      <div className='h-full relative px-[2rem]'>
+      <div className='h-full relative px-[2rem] md:px-0'>
         {blogsNotFound ? (
           <div className='text-center text-2xl font-bold text-gray-500 pt-8'>
             No blogs found

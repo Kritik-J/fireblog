@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import day from "dayjs";
+import RenderRichText from "../../../../components/RichText/RenderRichText";
 
 const BlogContainer = ({ blog }) => {
   const time =
@@ -11,29 +12,31 @@ const BlogContainer = ({ blog }) => {
       <img
         src={blog.thumbnailURL}
         alt={blog.slug}
-        className="blog__thumbnail"
+        className='blog__thumbnail'
       />
 
       <ContentWrapper>
-        <div className="author__container">
+        <div className='author__container'>
           <img
             src={blog.author.photoURL}
             alt={blog.author.name}
-            className="author__photo"
+            className='author__photo'
           />
 
           <div>
-            <h3 className="author__name">{blog.author.name}</h3>
-            <p className="blog__date">Posted on {day(time).format("MMM DD")}</p>
+            <h3 className='author__name'>{blog.author.name}</h3>
+            <p className='blog__date'>Posted on {day(time).format("MMM DD")}</p>
           </div>
         </div>
 
-        <h2 className="blog__title">{blog.title}</h2>
-
-        <div className="blog__content">
-          {blog.content.split("\n").map((str, index) => (
+        <h1 className='blog__title'>{blog.title}</h1>
+        <br />
+        <br />
+        <div className='blog__content'>
+          {/* {blog.content.split("\n").map((str, index) => (
             <p key={index}>{str}</p>
-          ))}
+            ))} */}
+          <RenderRichText content={blog.content} />
         </div>
       </ContentWrapper>
     </BlogWrapper>
@@ -98,7 +101,6 @@ const ContentWrapper = styled.div`
   .blog__title {
     font-size: 3.2rem;
     font-weight: 800;
-    margin-bottom: 1rem;
     line-height: 4.8rem;
   }
 

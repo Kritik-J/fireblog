@@ -12,17 +12,17 @@ const SearchBlock = () => {
   return (
     <SearchContainer>
       <SearchbarContainer>
-        <form className="search__form" onSubmit={handleSearch}>
+        <form className='search__form' onSubmit={handleSearch}>
           <input
-            type="text"
-            placeholder="Search"
-            className="search__input"
+            type='text'
+            placeholder='Search'
+            className='search__input'
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
 
-          <button className="search__button">
-            <img src={SearchIcon} alt="search" className="search__icon" />
+          <button className='search__button'>
+            <img src={SearchIcon} alt='search' className='search__icon' />
           </button>
         </form>
       </SearchbarContainer>

@@ -15,8 +15,8 @@ const BlogBlock = ({ blog }) => {
 
   return (
     <BlogContainer>
-      <div className="blog__info">
-        <h1 className="blog__title">
+      <div className='blog__info'>
+        <h1 className='blog__title hover:text-slate-700'>
           <Link to={`/blog/${blog.slug}`}>
             {screenSize < 768 && blog.title.length > 64
               ? blog.title.slice(0, 64) + ".."
@@ -24,30 +24,30 @@ const BlogBlock = ({ blog }) => {
           </Link>
         </h1>
 
-        <div className="blog__author">
+        <div className='blog__author'>
           <img
-            className="blog__author-image"
+            className='blog__author-image'
             src={blog.author.photoURL}
             alt={blog.author.name}
           />
 
-          <p className="blog__author-name">{blog.author.name}</p>
+          <p className='blog__author-name'>{blog.author.name}</p>
         </div>
 
-        <div className="blog__createdAt">
-          <p className="blog__createdAt-date">
+        <div className='blog__createdAt'>
+          <p className='blog__createdAt-date'>
             {day(time).format("DD MMM YYYY")}
           </p>
 
-          <p className="blog__createdAt-time">
+          <p className='blog__createdAt-time'>
             {day(time).format("hh:mm:ss a")}
           </p>
         </div>
       </div>
 
       <Link to={`/blog/${blog.slug}`}>
-        <div className="flex items-center h-full">
-          <img src={blog.thumbnailURL} alt="blog" className="blog__image" />
+        <div className='flex items-center h-full'>
+          <img src={blog.thumbnailURL} alt='blog' className='blog__image' />
         </div>
       </Link>
     </BlogContainer>
@@ -118,10 +118,10 @@ const BlogContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 1rem 0;
 
     .blog__title {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
     }
 
     .blog__createdAt-date,
@@ -141,7 +141,7 @@ const BlogContainer = styled.div`
     }
 
     .blog__image {
-      min-width: 14rem;
+      min-width: 12rem;
       height: 10rem;
     }
   }

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/macro";
 import { createBlogAsync } from "../../../features/createBlog/createBlogAPI";
-import { Alert, Loader } from "../../../components";
+import { Alert, Editor, Loader, RenderRichText } from "../../../components";
 import {
   clearError,
   clearMessage,
@@ -12,6 +12,7 @@ const CreateBlog = () => {
   const [title, setTitle] = React.useState("");
   const [thumbnail, setThumbnail] = React.useState("");
   const [content, setContent] = React.useState("");
+
   const thumbnailRef = React.useRef(null);
 
   const dispatch = useDispatch();
@@ -103,20 +104,14 @@ const CreateBlog = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          {/* rich text editor */}
           <label htmlFor='content' className='form__label'>
             Content
           </label>
 
-          <textarea
-            id='content'
-            className='form__input'
-            rows='3'
-            cols='50'
-            required
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
+          {/* rich text editor */}
+          <div className='mb-[1rem] border-[0.1rem] border-black rounded-[0.4rem] p-1'>
+            <Editor content={content} setContent={setContent} />
+          </div>
 
           <button type='submit' className='form__button'>
             Create
@@ -146,9 +141,13 @@ const CreateBlog = () => {
             {title ? title : "Title goes here ..."}
           </h2>
 
-          <p className='preview__content__description'>
-            {content ? content : "Content goes here ..."}
-          </p>
+          <div className='preview__content__description p-4'>
+            {content ? (
+              <RenderRichText content={content} />
+            ) : (
+              <p>Content goes here ...</p>
+            )}
+          </div>
         </div>
       </BlogPreviewContainer>
     </CreateBlogScreen>
@@ -276,6 +275,8 @@ const CreateBlogContainer = styled.div`
 `;
 
 const BlogPreviewContainer = styled.div`
+  width: 100%;
+
   .preview__title {
     font-size: 2.4rem;
     font-weight: 700;
@@ -299,6 +300,8 @@ const BlogPreviewContainer = styled.div`
 
   .preview__content {
     margin-top: 1rem;
+    width: 100%;
+    overflow: hidden;
 
     .preview__content__title {
       font-size: 2rem;
@@ -306,8 +309,13 @@ const BlogPreviewContainer = styled.div`
     }
 
     .preview__content__description {
-      font-size: 1.6rem;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
+      background-color: #f2f2f2;
+      border-radius: 0.4rem;
+
+      p {
+        font-size: 1.6rem;
+      }
     }
   }
 
@@ -322,7 +330,9 @@ const BlogPreviewContainer = styled.div`
       }
 
       .preview__content__description {
-        font-size: 1.4rem;
+        p {
+          font-size: 1.4rem;
+        }
       }
     }
   }
