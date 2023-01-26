@@ -39,6 +39,7 @@ const LeftContainer = styled.div`
 
   @media (max-width: 768px) {
     padding: 0;
+    border-right: none;
   }
 `;
 

@@ -12,6 +12,9 @@ const RenderRichText = ({ content }) => {
 export default RenderRichText;
 
 const RenderBody = styled.div`
+  width: 100%;
+  position: relative;
+
   h1 {
     font-size: 2.4rem;
   }
@@ -114,8 +117,27 @@ const RenderBody = styled.div`
     color: white;
     border-radius: 0.4rem;
     padding: 1rem;
-
     white-space: pre-wrap;
+    overflow: auto;
+    max-height: 32rem;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+  }
+
+  .ql-syntax {
+    position: relative;
+  }
+
+  .copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: #3d3d3d;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
   }
 
   @media (max-width: 768px) {
