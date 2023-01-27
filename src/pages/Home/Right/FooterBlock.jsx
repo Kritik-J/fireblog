@@ -5,14 +5,21 @@ const FooterBlock = () => {
   return (
     <FooterContainer>
       <ul>
-        <li>Blogs</li>
+        <li>Home</li>
+        <li>Terms</li>
+        <li>Privacy</li>
       </ul>
+
       <ul>
-        <li>Contact</li>
-        <li>About</li>
+        <li>Home</li>
+        <li>Terms</li>
+        <li>Privacy</li>
       </ul>
+
       <ul>
-        <li>Join now</li>
+        <li>Home</li>
+        <li>Terms</li>
+        <li>Privacy</li>
       </ul>
     </FooterContainer>
   );

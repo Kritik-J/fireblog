@@ -7,14 +7,14 @@ const WidgetBlock = () => {
   const { recommendedBlogs } = useSelector((state) => state.blog);
 
   return (
-    <WidgetContainer className="bg-green-500">
-      <h1 className="widget__header">Recommended Blogs</h1>
+    <WidgetContainer className='bg-green-500'>
+      <h1 className='widget__header'>Recommended Blogs</h1>
 
-      <ul className="widget__list">
+      <ul className='widget__list'>
         {recommendedBlogs &&
           recommendedBlogs.map((blog) => (
-            <li key={blog.id} className="widget__item">
-              <Link to={`/blog/${blog.slug}`}>
+            <li key={blog.id} className='widget__item'>
+              <Link to={`/blog/${blog.slug}`} className='hover:text-quaternary'>
                 {blog.title.length > 64
                   ? blog.title.slice(0, 64) + ".."
                   : blog.title}
@@ -23,7 +23,7 @@ const WidgetBlock = () => {
           ))}
 
         {recommendedBlogs.length === 0 && (
-          <li className="widget__item">No Recommendations</li>
+          <li className='widget__item'>No Recommendations</li>
         )}
       </ul>
     </WidgetContainer>

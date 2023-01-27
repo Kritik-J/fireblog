@@ -2,7 +2,15 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#ffffff",
+        secondary: "#00bfa6",
+        tertiary: "#000000",
+        // quaternary: "#301E67",
+        quaternary: "#0E5E6F",
+      },
+    },
 
     screens: {
       xs: { max: "420px" },

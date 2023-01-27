@@ -109,7 +109,7 @@ const CreateBlog = () => {
           </label>
 
           {/* rich text editor */}
-          <div className='mb-[1rem] border-[0.1rem] border-black rounded-[0.4rem] p-1'>
+          <div className='mb-[1rem] border-[0.1rem] border-black rounded-[0.4rem]'>
             <Editor content={content} setContent={setContent} />
           </div>
 
@@ -141,7 +141,7 @@ const CreateBlog = () => {
             {title ? title : "Title goes here ..."}
           </h2>
 
-          <div className='preview__content__description p-4'>
+          <div className='preview__content__description'>
             {content ? (
               <RenderRichText content={content} />
             ) : (
@@ -208,6 +208,7 @@ const CreateBlogContainer = styled.div`
     margin-bottom: 1rem;
     outline: none;
     resize: vertical;
+    background-color: transparent;
   }
 
   .file__input__container {
@@ -310,8 +311,6 @@ const BlogPreviewContainer = styled.div`
 
     .preview__content__description {
       margin-top: 1rem;
-      background-color: #f2f2f2;
-      border-radius: 0.4rem;
 
       p {
         font-size: 1.6rem;

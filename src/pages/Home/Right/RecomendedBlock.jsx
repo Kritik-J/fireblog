@@ -14,7 +14,7 @@ const RecomendedBlock = () => {
         {recommendedBlogs &&
           recommendedBlogs.map((blog) => (
             <li key={blog.id} className='recommended__item'>
-              <Link to={`/blog/${blog.slug}`}>
+              <Link to={`/blog/${blog.slug}`} className='hover:text-quaternary'>
                 {blog.title.length > 64
                   ? blog.title.slice(0, 64) + ".."
                   : blog.title}

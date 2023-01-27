@@ -81,7 +81,7 @@ const RenderBody = styled.div`
     font-style: italic;
     border-left: 0.4rem solid var(--secondary);
     margin-left: 0;
-    background-color: #e5e5e5;
+    background-color: #eee;
     padding: 0.5rem 1rem;
     padding-left: 1rem;
     border-radius: 0.4rem;

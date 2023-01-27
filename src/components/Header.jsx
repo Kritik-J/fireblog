@@ -118,7 +118,6 @@ const JoinButton = styled.button`
   font-weight: 600;
 
   &:hover {
-    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.4);
     cursor: pointer;
   }
 
@@ -152,7 +151,6 @@ const WriteButton = styled(NavLinkElement)`
   border: 1px solid var(--secondary);
 
   &:hover {
-    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.4);
     cursor: pointer;
   }
 `;

@@ -26,7 +26,7 @@ const Center = () => {
   return (
     <>
       {loading && <Loader />}
-      <div className='h-full relative px-[2rem] md:px-0'>
+      <div className='h-full relative px-[2rem] sm:px-0'>
         {blogsNotFound ? (
           <div className='text-center text-2xl font-bold text-gray-500 pt-8'>
             No blogs found

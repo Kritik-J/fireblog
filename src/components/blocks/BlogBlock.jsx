@@ -16,8 +16,8 @@ const BlogBlock = ({ blog }) => {
   return (
     <BlogContainer>
       <div className='blog__info'>
-        <h1 className='blog__title hover:text-slate-700'>
-          <Link to={`/blog/${blog.slug}`}>
+        <h1 className='blog__title'>
+          <Link to={`/blog/${blog.slug}`} className='hover:text-quaternary'>
             {screenSize < 768 && blog.title.length > 64
               ? blog.title.slice(0, 64) + ".."
               : blog.title}
